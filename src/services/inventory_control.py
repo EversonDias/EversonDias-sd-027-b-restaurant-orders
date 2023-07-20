@@ -27,6 +27,7 @@ class InventoryMapping:
 
     # Req 5.1
     def check_recipe_availability(self, recipe: Recipe) -> bool:
+
         pass
 
     # Req 5.2
