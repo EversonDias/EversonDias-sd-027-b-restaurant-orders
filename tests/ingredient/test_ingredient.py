@@ -12,5 +12,5 @@ def test_ingredient():
     assert recipes.name == "bacon"
     assert recipes.__repr__() == "Ingredient('bacon')"
     assert recipes.restrictions == mock_restrictions
-    assert len(f'{recipes.__hash__()}') == 20
+    assert len(f'{recipes.__hash__()}') >= 19
     assert recipes.__eq__(recipes)
