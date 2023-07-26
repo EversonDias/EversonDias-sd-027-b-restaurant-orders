@@ -3,6 +3,7 @@ from typing import Dict, List
 from services.inventory_control import InventoryMapping
 from services.menu_data import MenuData
 
+
 DATA_PATH = "data/menu_base_data.csv"
 INVENTORY_PATH = "data/inventory_base_data.csv"
 
@@ -26,4 +27,18 @@ class MenuBuilder:
 
     # Req 4
     def get_main_menu(self, restriction=None) -> List[Dict]:
-        pass
+        result: list = list()
+        inventory = set(self.inventory.inventory)
+        for dishes in self.menu_data.dishes:
+            dishes_restriction = dishes.get_restrictions()
+            dishes_ingredients = dishes.get_ingredients()
+            isAvailable = dishes_ingredients.issubset(inventory)
+            if restriction not in list(dishes_restriction) and isAvailable:
+                new_dishes = {
+                        "dish_name": dishes.name,
+                        "ingredients": dishes_ingredients,
+                        "price": dishes.price,
+                        "restrictions": dishes_restriction,
+                    }
+                result.append(new_dishes)
+        return result
